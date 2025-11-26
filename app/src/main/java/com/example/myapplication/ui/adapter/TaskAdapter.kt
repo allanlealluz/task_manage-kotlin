@@ -30,7 +30,6 @@ class TaskAdapter(
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        // ← ID corrigido aqui para coincidir com o XML (tvTaskTitle)
         private val title: TextView = itemView.findViewById(R.id.tvTaskTitle)
         private val check: CheckBox = itemView.findViewById(R.id.cbTaskCompleted)
         private val delete: ImageButton = itemView.findViewById(R.id.btnDeleteTask)
@@ -40,14 +39,12 @@ class TaskAdapter(
             title.text = task.title
             check.isChecked = task.isCompleted
 
-            // Atualiza estilo do texto
             title.paintFlags =
                 if (task.isCompleted)
                     title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 else
                     title.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
 
-            // Evitar callback duplicado
             check.setOnCheckedChangeListener(null)
 
             check.setOnCheckedChangeListener { _, isChecked ->
